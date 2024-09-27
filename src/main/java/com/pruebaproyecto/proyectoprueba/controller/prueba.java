@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api")
-public class prueba {
 
+public class prueba {
     @GetMapping("")
     public String prueba_hola(){
         return "Hola sonso";

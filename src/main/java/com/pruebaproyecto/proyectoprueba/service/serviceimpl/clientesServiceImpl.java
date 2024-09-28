@@ -2,11 +2,14 @@ package com.pruebaproyecto.proyectoprueba.service.serviceimpl;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.pruebaproyecto.proyectoprueba.common.CommonSvcImpl;
 import com.pruebaproyecto.proyectoprueba.models.clientesModel;
 import com.pruebaproyecto.proyectoprueba.repository.clienteRepository;
 import com.pruebaproyecto.proyectoprueba.service.clientesService;
 
+@Service
 public class clientesServiceImpl extends CommonSvcImpl<clientesModel, clienteRepository> implements clientesService {
 
     @Override

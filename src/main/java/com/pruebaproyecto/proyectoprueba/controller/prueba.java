@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class prueba {
     @GetMapping("")
     public String prueba_hola(){
-        return "Hola sonso";
+        return "Hola sonsote";
     }
 }

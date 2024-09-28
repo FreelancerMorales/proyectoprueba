@@ -4,5 +4,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.pruebaproyecto.proyectoprueba.models.clientesModel;
 
 public interface clienteRepository extends CrudRepository<clientesModel, Object> {
-
+    clientesModel findByNombre(String nombre);
 }

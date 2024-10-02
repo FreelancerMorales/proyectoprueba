@@ -22,17 +22,17 @@ import com.pruebaproyecto.proyectoprueba.service.productosService;
 @CrossOrigin
 public class productosController {
     @Autowired
-    private productosService pS;
+    private productosService productosService;
 
     @GetMapping("/listar")
     public Iterable<productosModel> findAll() {
-        return this.pS.findAll();
+        return this.productosService.findAll();
     }
 
     @PostMapping("/guardar")
     public ResponseEntity<String> saveProducto(@RequestBody productosModel entity) {
         try {
-            this.pS.save(entity);
+            this.productosService.save(entity);
             return ResponseEntity.ok("Producto Guardado Correctamente");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error en el Servidor");
@@ -42,7 +42,7 @@ public class productosController {
     @DeleteMapping("/eliminar/{idProductos}")
     public ResponseEntity<String> deleteProductos(@PathVariable int idProductos) {
         try {
-            this.pS.deleteById(idProductos);
+            this.productosService.deleteById(idProductos);
             return ResponseEntity.ok("Producto Eliminado Correctamente");
         } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error en el Servidor");
@@ -52,7 +52,7 @@ public class productosController {
     @PutMapping("/actualizar/{idProductos}")
     public ResponseEntity<String> updateProductos(@PathVariable int idProductos, @RequestBody productosModel entity) {
         try {
-            Optional<productosModel> productoOptional = this.pS.findById(idProductos);
+            Optional<productosModel> productoOptional = this.productosService.findById(idProductos);
 
             if (productoOptional.isPresent()) {
                 productosModel productoExistente = productoOptional.get();
@@ -61,7 +61,7 @@ public class productosController {
                 productoExistente.setPrecio(entity.getPrecio());
                 productoExistente.setStock(entity.getStock());
 
-                this.pS.save(productoExistente);
+                this.productosService.save(productoExistente);
 
                 return ResponseEntity.ok("Producto Actualizado Correctamente");
             } else {

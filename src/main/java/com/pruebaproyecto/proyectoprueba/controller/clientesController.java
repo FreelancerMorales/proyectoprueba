@@ -25,17 +25,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class clientesController {
     @Autowired
-    private clientesService cS;
+    private clientesService clientesService;
 
     @GetMapping("/listar")
     public Iterable<clientesModel> getClientes() {
-        return this.cS.findAll();
+        return this.clientesService.findAll();
     }
     
     @PostMapping("/guardar")
     public ResponseEntity<String> saveClientes(@RequestBody clientesModel entity) {
         try {
-            this.cS.save(entity);
+            this.clientesService.save(entity);
             return ResponseEntity.ok("Cliente Guardado Correctamente");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error en el Servidor");
@@ -45,7 +45,7 @@ public class clientesController {
     @DeleteMapping("/eliminar/{idCliente}")
     public ResponseEntity<String> deleteClientes(@PathVariable int idCliente) {
         try {
-            this.cS.deleteById(idCliente);
+            this.clientesService.deleteById(idCliente);
             return ResponseEntity.ok("Cliente Eliminado Correctamente");
         } catch (Exception e) {
                 return ResponseEntity.badRequest().body("Error en el Servidor");
@@ -55,7 +55,7 @@ public class clientesController {
     @PutMapping("/actualizar/{idClientes}")
     public ResponseEntity<String> updateClientes(@PathVariable int idClientes, @RequestBody clientesModel entity) {
         try {
-            Optional<clientesModel> clienteOptional = this.cS.findById(idClientes);
+            Optional<clientesModel> clienteOptional = this.clientesService.findById(idClientes);
             
             if (clienteOptional.isPresent()) {
                 clientesModel clientesExistente = clienteOptional.get();
@@ -63,7 +63,7 @@ public class clientesController {
                 clientesExistente.setNombre(entity.getNombre());
                 clientesExistente.setApellido(entity.getApellido());
                 
-                this.cS.save(clientesExistente);
+                this.clientesService.save(clientesExistente);
                 
                 return ResponseEntity.ok("Cliente Actualizado Correctamente");
             } else {
